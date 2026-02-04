@@ -1,0 +1,55 @@
+/* Reset tampilan dasar */
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #1a1a1a; /* Background gelap biar keren */
+    overflow: hidden; /* Mencegah scroll */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: sans-serif;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    max-width: 640px; /* Batas lebar di layar besar biar gak pecah */
+    aspect-ratio: 16/9; /* Menjaga rasio video standar */
+}
+
+/* Sembunyikan video mentah */
+.input_video {
+    display: none;
+}
+
+/* Tampilan Canvas (Hasil Akhir) */
+.output_canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    /* PENTING: Efek Mirror (Cermin) biar gerakan tangan natural */
+    transform: scaleX(-1);
+    border-radius: 12px; /* Sedikit melengkung di ujung */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+
+/* Layar Loading */
+.loading-screen {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 10;
+    border-radius: 12px;
+}
+
+/* Class tambahan untuk menyembunyikan loading saat siap */
+.loaded .loading-screen {
+    display: none;
+}
