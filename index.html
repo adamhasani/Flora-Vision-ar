@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flora Vision AR - Demo</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  
+  <div class="container">
+    <video class="input_video"></video>
+    
+    <canvas class="output_canvas" width="1280" height="720"></canvas>
+
+    <div class="loading-screen" id="loading">
+        <p>Sedang menyiapkan kamera & AI... <br> Mohon izinkan akses kamera.</p>
+    </div>
+  </div>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
