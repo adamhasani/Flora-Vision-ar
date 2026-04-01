@@ -3,25 +3,55 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Flora Vision AR - Demo</title>
+  <title>Flora Vision AR</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Quicksand:wght@300;400&display=swap" rel="stylesheet">
 
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
 
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  
-  <div class="container">
-    <video class="input_video"></video>
-    
-    <canvas class="output_canvas" width="1280" height="720"></canvas>
 
-    <div class="loading-screen" id="loading">
-        <p>Sedang menyiapkan kamera & AI... <br> Mohon izinkan akses kamera.</p>
+  <div class="loading-screen" id="loading">
+    <div class="loading-inner">
+      <div class="loading-flower">🌸</div>
+      <h1 class="loading-title">Flora Vision</h1>
+      <p class="loading-sub">Memuat kamera & AI...</p>
+      <div class="loading-bar"><div class="loading-fill"></div></div>
     </div>
+  </div>
+
+  <div class="app-wrapper">
+    <header class="app-header">
+      <div class="logo">
+        <span class="logo-icon">🌿</span>
+        <span class="logo-text">Flora Vision <em>AR</em></span>
+      </div>
+      <div class="theme-switcher">
+        <button class="theme-btn active" data-theme="sakura" title="Sakura">🌸</button>
+        <button class="theme-btn" data-theme="forest" title="Hutan">🌿</button>
+        <button class="theme-btn" data-theme="cosmos" title="Cosmos">💫</button>
+        <button class="theme-btn" data-theme="fire" title="Api">🔥</button>
+      </div>
+    </header>
+
+    <div class="container">
+      <video class="input_video"></video>
+      <canvas class="output_canvas" id="mainCanvas" width="1280" height="720"></canvas>
+      <div class="gesture-hint" id="gestureHint">
+        <span class="hint-icon">👆</span>
+        <span class="hint-text">Gerakkan tangan untuk menaburkan bunga!</span>
+      </div>
+      <div class="gesture-badge" id="gestureBadge"></div>
+    </div>
+
+    <footer class="app-footer">
+      <span>Arahkan jari ke kamera — <em>biarkan bunga bermekaran</em></span>
+    </footer>
   </div>
 
   <script src="script.js" defer></script>
