@@ -1,0 +1,270 @@
+/* ===== CSS VARIABLES ===== */
+:root {
+  --bg: #0d0d12;
+  --accent1: #ffb7c5;
+  --accent2: #ff85a1;
+  --accent3: #c084fc;
+  --glow: rgba(255, 133, 161, 0.4);
+  --text: #f5e6ec;
+  --text-muted: rgba(245, 230, 236, 0.5);
+  --glass: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+/* ===== RESET ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body, html {
+  width: 100%; height: 100%;
+  background: var(--bg);
+  font-family: 'Quicksand', sans-serif;
+  color: var(--text);
+  overflow: hidden;
+}
+
+/* ===== LOADING SCREEN ===== */
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse at center, #1a0a1e 0%, #0d0d12 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+.loading-screen.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.loading-inner {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.loading-flower {
+  font-size: 56px;
+  animation: floatSpin 3s ease-in-out infinite;
+  filter: drop-shadow(0 0 20px var(--glow));
+}
+@keyframes floatSpin {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-12px) rotate(15deg); }
+}
+.loading-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.8rem;
+  font-weight: 300;
+  letter-spacing: 6px;
+  background: linear-gradient(135deg, var(--accent1), var(--accent3));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.loading-sub {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  letter-spacing: 2px;
+}
+.loading-bar {
+  width: 200px;
+  height: 2px;
+  background: var(--glass-border);
+  border-radius: 99px;
+  overflow: hidden;
+  margin-top: 8px;
+}
+.loading-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent1), var(--accent3));
+  border-radius: 99px;
+  animation: fillBar 2s ease-in-out infinite;
+}
+@keyframes fillBar {
+  0% { width: 0%; }
+  60% { width: 80%; }
+  100% { width: 100%; }
+}
+
+/* ===== APP WRAPPER ===== */
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  padding: 16px;
+  gap: 12px;
+}
+
+/* ===== HEADER ===== */
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 800px;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: 14px;
+  padding: 10px 18px;
+  backdrop-filter: blur(12px);
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.logo-icon { font-size: 1.4rem; }
+.logo-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  font-weight: 300;
+  letter-spacing: 3px;
+  color: var(--text);
+}
+.logo-text em {
+  font-style: italic;
+  background: linear-gradient(135deg, var(--accent1), var(--accent3));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.theme-switcher {
+  display: flex;
+  gap: 8px;
+}
+.theme-btn {
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  width: 34px;
+  height: 34px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.theme-btn:hover {
+  background: var(--glass);
+  transform: scale(1.1);
+}
+.theme-btn.active {
+  border-color: var(--accent1);
+  background: rgba(255, 133, 161, 0.15);
+  box-shadow: 0 0 10px var(--glow);
+}
+
+/* ===== CAMERA CONTAINER ===== */
+.container {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  flex: 1;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 0 40px rgba(0,0,0,0.6), 0 0 0 1px var(--glass-border);
+}
+.input_video { display: none; }
+.output_canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  transform: scaleX(-1);
+  object-fit: cover;
+}
+
+/* ===== GESTURE HINT ===== */
+.gesture-hint {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(8px);
+  border-radius: 99px;
+  padding: 8px 18px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+  transition: opacity 0.5s ease;
+  white-space: nowrap;
+}
+.gesture-hint.hidden { opacity: 0; pointer-events: none; }
+.hint-icon { font-size: 1rem; animation: bounce 1.5s ease-in-out infinite; }
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+/* ===== GESTURE BADGE ===== */
+.gesture-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: rgba(0,0,0,0.5);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(8px);
+  border-radius: 99px;
+  padding: 6px 16px;
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  color: var(--accent1);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  text-transform: uppercase;
+}
+.gesture-badge.show { opacity: 1; }
+
+/* ===== FOOTER ===== */
+.app-footer {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  letter-spacing: 2px;
+  text-align: center;
+}
+.app-footer em {
+  font-style: italic;
+  color: var(--accent1);
+}
+
+/* ===== THEMES ===== */
+body[data-theme="forest"] {
+  --accent1: #86efac;
+  --accent2: #4ade80;
+  --accent3: #a3e635;
+  --glow: rgba(74, 222, 128, 0.4);
+  --text: #e8f5ee;
+  --text-muted: rgba(232, 245, 238, 0.5);
+}
+body[data-theme="cosmos"] {
+  --accent1: #a5b4fc;
+  --accent2: #818cf8;
+  --accent3: #e879f9;
+  --glow: rgba(129, 140, 248, 0.5);
+  --text: #eef2ff;
+  --text-muted: rgba(238, 242, 255, 0.5);
+}
+body[data-theme="fire"] {
+  --accent1: #fbbf24;
+  --accent2: #f97316;
+  --accent3: #ef4444;
+  --glow: rgba(249, 115, 22, 0.5);
+  --text: #fef3c7;
+  --text-muted: rgba(254, 243, 199, 0.5);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 600px) {
+  .app-wrapper { padding: 10px; gap: 8px; }
+  .logo-text { font-size: 1rem; }
+  .gesture-hint span.hint-text { display: none; }
+}
